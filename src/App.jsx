@@ -249,7 +249,7 @@ export default function App() {
             </h1>
 
             <p className="text-zinc-400 text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-              O sistema CDF (Código do Fechamento) que transforma o seu medo em confiança absoluta e lucro real diante de qualquer cliente.
+              O Método CDF (Código do Fechamento) que transforma o seu medo em confiança absoluta e lucro real diante de qualquer cliente.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
