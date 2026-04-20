@@ -5,7 +5,6 @@ import {
   Lock,
   Unlock,
   ChevronDown,
-  Play,
   CheckCircle2,
   Zap,
   Target,
@@ -295,21 +294,16 @@ export default function App() {
           <SectionTitle subtitle="Entenda a ciência por trás de fechar vendas impossíveis com facilidade.">
             Por que o <span className="text-amber-500">CDF</span> é diferente?
           </SectionTitle>
-          <motion.div whileHover={{ scale: 1.01 }} className="group relative aspect-video rounded-3xl border-4 border-zinc-900 overflow-hidden cursor-pointer shadow-2xl">
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop"
-              className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-105"
-              alt="Mulher profissional CDF"
+          <div className="rounded-3xl border-4 border-zinc-900 overflow-hidden shadow-2xl" style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+            <iframe
+              src="https://player.vimeo.com/video/1184942707?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+              title="VSL CDF"
             />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 flex items-center justify-center transition-all duration-500">
-              <div className="relative">
-                <div className="absolute inset-0 bg-amber-500/40 blur-[60px] rounded-full scale-125 animate-pulse" />
-                <div className="relative w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.6)] group-hover:scale-110 transition-transform">
-                  <Play size={32} fill="black" className="ml-1.5 text-zinc-950" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          </div>
+          <script src="https://player.vimeo.com/api/player.js" />
         </div>
       </section>
 
