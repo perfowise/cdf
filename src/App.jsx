@@ -191,7 +191,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
 
 export default function App() {
   const [faqOpenIndex, setFaqOpenIndex] = useState(null);
-  const [loadingCheckout, setLoadingCheckout] = useState(false);
+  const CHECKOUT_URL = 'https://pay.hotmart.com/Q105475690K';
 
   const modules = [
     { title: "Módulo 1: Mentalidade", topics: ["Fim da rejeição", "Postura de Elite"], icon: <Brain size={32} /> },
@@ -204,15 +204,7 @@ export default function App() {
   ];
 
   const handleCheckout = () => {
-    setLoadingCheckout(true);
-    setTimeout(() => {
-      setLoadingCheckout(false);
-      window.open('https://pay.hotmart.com/cdf-vendas', '_blank');
-    }, 2000);
-  };
-
-  const scrollToOffer = () => {
-    document.getElementById('offer-section')?.scrollIntoView({ behavior: 'smooth' });
+    window.open(CHECKOUT_URL, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -253,7 +245,7 @@ export default function App() {
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
               <button
-                onClick={scrollToOffer}
+                onClick={handleCheckout}
                 className="group relative px-10 py-5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)] flex items-center gap-3 text-lg overflow-hidden uppercase tracking-tighter"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
@@ -303,6 +295,12 @@ export default function App() {
               title="VSL CDF"
             />
           </div>
+          <button
+            onClick={handleCheckout}
+            className="mt-8 w-full max-w-lg mx-auto py-5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-lg md:text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] uppercase tracking-tight"
+          >
+            🔒 Garantir Minha Vaga Agora
+          </button>
           <script src="https://player.vimeo.com/api/player.js" />
         </div>
       </section>
@@ -432,10 +430,8 @@ export default function App() {
                 <span className="text-6xl md:text-8xl font-black text-amber-500 tracking-tighter block mb-1 leading-none">R$ 297</span>
                 <span className="text-zinc-400 font-bold uppercase tracking-widest block text-xs">ou 12x de R$ 29,67 no cartão</span>
               </div>
-              <button onClick={handleCheckout} disabled={loadingCheckout} className="w-full py-6 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] group overflow-hidden relative">
-                {loadingCheckout ? "PROCESSANDO..." : (
-                  <div className="flex items-center justify-center gap-3 uppercase"><Unlock size={24} /> Destravar Agora</div>
-                )}
+              <button onClick={handleCheckout} className="w-full py-6 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] group overflow-hidden relative">
+                <div className="flex items-center justify-center gap-3 uppercase"><Unlock size={24} /> Destravar Agora</div>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
               </button>
             </div>
