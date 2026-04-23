@@ -166,7 +166,10 @@ const MapNode = ({ module, index, isLast }) => {
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
   <div className="border-b border-zinc-800 bg-zinc-900/30 rounded-xl mb-3 overflow-hidden transition-all duration-300">
     <button
-      onClick={onClick}
+      onClick={() => {
+        trackFAQInteraction(question, !isOpen);
+        onClick();
+      }}
       className="w-full p-5 text-left flex items-center justify-between hover:bg-zinc-800 transition-all group"
     >
       <span className="text-base md:text-lg font-bold text-zinc-100 pr-8 leading-tight">{question}</span>
@@ -189,9 +192,85 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
   </div>
 );
 
+// ===== FUNÇÕES DE RASTREAMENTO =====
+const trackEvent = (eventName, eventData = {}) => {
+  // Google Analytics 4
+  if (window.gtag) {
+    window.gtag('event', eventName, eventData);
+  }
+  
+  // Facebook Pixel
+  if (window.fbq) {
+    window.fbq('track', eventName, eventData);
+  }
+  
+  console.log(`📊 Event Tracked: ${eventName}`, eventData);
+};
+
+const trackCheckout = () => {
+  trackEvent('begin_checkout', {
+    currency: 'BRL',
+    value: 297,
+    items: [{
+      item_name: 'Código do Fechamento - CDF',
+      price: 297,
+      quantity: 1,
+      item_category: 'Curso Online'
+    }]
+  });
+  
+  // Facebook Pixel - InitiateCheckout
+  window.fbq?.('track', 'InitiateCheckout', {
+    currency: 'BRL',
+    value: 297
+  });
+};
+
+const trackSectionView = (sectionName) => {
+  trackEvent('view_section', {
+    section: sectionName,
+    timestamp: new Date().toISOString()
+  });
+};
+
+const trackFAQInteraction = (question, isOpen) => {
+  trackEvent('faq_' + (isOpen ? 'expand' : 'collapse'), {
+    question: question,
+    action: isOpen ? 'expand' : 'collapse'
+  });
+};
+
+const trackLinkClick = (linkName, linkUrl) => {
+  trackEvent('outbound_link', {
+    link_name: linkName,
+    link_url: linkUrl
+  });
+};
+
 export default function App() {
   const [faqOpenIndex, setFaqOpenIndex] = useState(null);
   const CHECKOUT_URL = 'https://pay.hotmart.com/Q105475690K';
+
+  // ===== RASTREAMENTO DE SCROLL E SEÇÕES =====
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['video-section', 'offer-section'];
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight * 0.75 && rect.bottom > 0;
+          if (isVisible && !element.dataset.tracked) {
+            trackSectionView(sectionId);
+            element.dataset.tracked = 'true';
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const modules = [
     { title: "Módulo 1: Mentalidade", topics: ["Fim da rejeição", "Postura de Elite"], icon: <Brain size={32} /> },
@@ -204,6 +283,7 @@ export default function App() {
   ];
 
   const handleCheckout = () => {
+    trackCheckout();
     window.open(CHECKOUT_URL, '_blank', 'noopener,noreferrer');
   };
 
@@ -466,7 +546,13 @@ export default function App() {
           </div>
           <div className="flex items-center justify-center gap-4 bg-zinc-900/50 px-6 py-3 rounded-full border border-white/5">
             <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.2em] whitespace-nowrap">Desenvolvido por:</span>
-            <a href="https://perfowise.com.br/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-all hover:scale-105 active:scale-95">
+            <a 
+              href="https://perfowise.com.br/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => trackLinkClick('Perfowise', 'https://perfowise.com.br/')}
+              className="hover:opacity-80 transition-all hover:scale-105 active:scale-95"
+            >
               <img src="https://i.postimg.cc/SKGPg3B5/Prancheta_1_co_pia_6.png" alt="Logo Perfowise" className="h-7 md:h-9 object-contain" />
             </a>
           </div>
@@ -474,9 +560,36 @@ export default function App() {
             Copyright © 2024 Todos os direitos reservados. Este site não é afiliado ao Google ou Facebook.
           </p>
           <div className="flex gap-8 text-zinc-500 text-[10px] font-black uppercase tracking-widest">
-            <a href="#" className="hover:text-amber-500 transition-colors">Termos</a>
-            <a href="#" className="hover:text-amber-500 transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-amber-500 transition-colors">Suporte</a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                trackLinkClick('Termos', '#termos');
+              }}
+              className="hover:text-amber-500 transition-colors"
+            >
+              Termos
+            </a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                trackLinkClick('Privacidade', '#privacidade');
+              }}
+              className="hover:text-amber-500 transition-colors"
+            >
+              Privacidade
+            </a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                trackLinkClick('Suporte', '#suporte');
+              }}
+              className="hover:text-amber-500 transition-colors"
+            >
+              Suporte
+            </a>
           </div>
         </div>
       </footer>
