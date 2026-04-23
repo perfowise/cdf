@@ -436,11 +436,32 @@ export default function App() {
           <SectionTitle subtitle={<>Pessoas reais que saíram da inércia para <br className="hidden md:block" /> o fechamento em tempo recorde.</>}>
             Validado por <span className="text-amber-500">Quem Aplica</span>
           </SectionTitle>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
             {[
-              { name: "André Santos", role: "Corretor", img: "https://i.pravatar.cc/150?u=andre", text: "Minha taxa de conversão subiu 40% no primeiro mês. O script de objeções é surreal." },
-              { name: "Juliana Rocha", role: "Agência Digital", img: "https://i.pravatar.cc/150?u=juliana", text: "Eu tinha pavor de falar o preço. Hoje falo com orgulho e o cliente agradece." },
-              { name: "Marcos Viana", role: "Vendedor B2B", img: "https://i.pravatar.cc/150?u=marcos", text: "Fechei um contrato de 50k usando as técnicas de gatilhos do Módulo 3. Incrível." },
+              {
+                name: "Fulvio Santos",
+                role: "Corretor de Imóveis",
+                img: "https://i.postimg.cc/Y9Yqm8Nt/Fulvio.png",
+                text: "Trabalhei anos no mercado imobiliário sem conseguir fechar metade do que eu deveria. Depois do CDF, aprendi a conduzir a negociação com autoridade real. Em menos de 30 dias fechei 3 contratos que antes eu teria perdido para a concorrência."
+              },
+              {
+                name: "Osmar Costa",
+                role: "Dono de Assessoria de Marketing",
+                img: "https://i.postimg.cc/prSVn79c/Foto-Osmar-Perfil.jpg",
+                text: "Como dono de assessoria, eu vendia o serviço, mas travava na hora de defender o preço. O CDF me deu as ferramentas para blindar o valor do meu trabalho. Hoje meus contratos são maiores e meus clientes chegam muito mais convictos."
+              },
+              {
+                name: "Pablio Tavares",
+                role: "Vendedor",
+                img: "https://i.postimg.cc/3NNmTs5f/Pablio.png",
+                text: "Eu achava que vender era um dom natural. O CDF me provou que é uma ciência exata. Aprendi a identificar objeções antes mesmo de o cliente verbalizá-las e a conduzir a conversa para o fechamento sem pressão. Minha comissão dobrou em dois meses."
+              },
+              {
+                name: "Rafael",
+                role: "Instalações de Mármores",
+                img: "https://i.postimg.cc/cCtCT0NQ/Rafael.png",
+                text: "No meu segmento, a concorrência é brutal e todo cliente só fala em preço. Depois do CDF, aprendi a apresentar o valor real do meu serviço antes de mencionar qualquer número. Passei a fechar obras que antes iam direto para o concorrente mais barato."
+              },
             ].map((testi, i) => (
               <motion.div key={i} whileHover={{ scale: 1.02 }} className="p-8 bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl flex flex-col items-center">
                 <div className="flex gap-1 mb-4 text-amber-500">
@@ -448,7 +469,7 @@ export default function App() {
                 </div>
                 <p className="text-zinc-300 text-base mb-8 leading-relaxed italic text-center">"{testi.text}"</p>
                 <div className="mt-auto flex items-center gap-3">
-                  <img src={testi.img} className="w-12 h-12 rounded-full border-2 border-amber-500 p-0.5" alt={testi.name} />
+                  <img src={testi.img} className="w-14 h-14 rounded-full border-2 border-amber-500 p-0.5 object-cover" alt={testi.name} />
                   <div className="text-left">
                     <div className="font-black uppercase tracking-tighter text-amber-500 text-xs">{testi.name}</div>
                     <div className="text-zinc-500 text-[10px] font-bold">{testi.role}</div>
