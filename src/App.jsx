@@ -529,7 +529,7 @@ export default function App() {
               <div className="mb-8 text-center">
                 <span className="text-zinc-500 line-through text-xl font-bold uppercase block mb-1 tracking-widest">R$ 997,00</span>
                 <span className="text-6xl md:text-8xl font-black text-amber-500 tracking-tighter block mb-1 leading-none">R$ 297</span>
-                <span className="text-zinc-400 font-bold uppercase tracking-widest block text-xs">ou 12x de R$ 29,67 no cartão</span>
+                <span className="text-zinc-400 font-bold uppercase tracking-widest block text-xs">ou 12x de R$ 30,72 no cartão</span>
               </div>
               <button onClick={handleCheckout} className="w-full py-6 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] group overflow-hidden relative">
                 <div className="flex items-center justify-center gap-3 uppercase"><Unlock size={24} /> Destravar Agora</div>
