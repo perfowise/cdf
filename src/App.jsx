@@ -283,7 +283,6 @@ export default function App() {
   ];
 
   const handleCheckout = (e) => {
-    e?.preventDefault();
     trackCheckout();
   };
 
