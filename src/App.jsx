@@ -249,7 +249,7 @@ const trackLinkClick = (linkName, linkUrl) => {
 
 export default function App() {
   const [faqOpenIndex, setFaqOpenIndex] = useState(null);
-  const CHECKOUT_URL = 'https://pay.hotmart.com/Q105475690K';
+  const CHECKOUT_URL = 'https://pay.hotmart.com/Q105475690K?checkoutMode=2';
 
   // ===== RASTREAMENTO DE SCROLL E SEÇÕES =====
   React.useEffect(() => {
@@ -282,9 +282,9 @@ export default function App() {
     { title: "Módulo 7: Pós-venda", topics: ["Encantamento do Cliente", "Geração de Indicações", "LTV Estratégico"], icon: <Heart size={32} /> },
   ];
 
-  const handleCheckout = () => {
+  const handleCheckout = (e) => {
+    e?.preventDefault();
     trackCheckout();
-    window.open(CHECKOUT_URL, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -324,14 +324,15 @@ export default function App() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-              <button
+              <a
+                href={CHECKOUT_URL}
                 onClick={handleCheckout}
-                className="group relative px-10 py-5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)] flex items-center gap-3 text-lg overflow-hidden uppercase tracking-tighter"
+                className="hotmart-fb group relative px-10 py-5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)] flex items-center gap-3 text-lg overflow-hidden uppercase tracking-tighter"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
                 QUERO DESTRAVAR O ACESSO
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
               <div className="flex flex-col items-start gap-1 text-[10px] text-zinc-500 font-bold uppercase tracking-[0.15em]">
                 <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-amber-500" /> Acesso Imediato</span>
                 <span className="flex items-center gap-2"><ShieldCheck size={14} className="text-amber-500" /> 100% Blindado</span>
@@ -375,12 +376,13 @@ export default function App() {
               title="VSL CDF"
             />
           </div>
-          <button
+          <a
+            href={CHECKOUT_URL}
             onClick={handleCheckout}
-            className="mt-8 w-full max-w-lg mx-auto py-5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-lg md:text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] uppercase tracking-tight"
+            className="hotmart-fb mt-8 w-full max-w-lg mx-auto py-5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-lg md:text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] uppercase tracking-tight block text-center"
           >
             🔒 Garantir Minha Vaga Agora
-          </button>
+          </a>
           <script src="https://player.vimeo.com/api/player.js" />
         </div>
       </section>
@@ -531,10 +533,10 @@ export default function App() {
                 <span className="text-6xl md:text-8xl font-black text-amber-500 tracking-tighter block mb-1 leading-none">R$ 297</span>
                 <span className="text-zinc-400 font-bold uppercase tracking-widest block text-xs">ou 12x de R$ 30,72 no cartão</span>
               </div>
-              <button onClick={handleCheckout} className="w-full py-6 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] group overflow-hidden relative">
+              <a href={CHECKOUT_URL} onClick={handleCheckout} className="hotmart-fb w-full py-6 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xl rounded-2xl transition-all duration-300 shadow-[0_15px_45px_rgba(245,158,11,0.3)] group overflow-hidden relative block text-center">
                 <div className="flex items-center justify-center gap-3 uppercase"><Unlock size={24} /> Destravar Agora</div>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              </button>
+              </a>
             </div>
           </div>
         </div>
